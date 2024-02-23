@@ -26,8 +26,8 @@ phases:
       - echo Build completed on $(date)
       - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 637423318618.dkr.ecr.ap-south-1.amazonaws.com
       - echo Pushing the Docker images...
-      - docker push ${REPOSITORY_URI}:latest
       - docker push ${REPOSITORY_URI}:${CODEBUILD_BUILD_NUMBER}
+      - docker push ${REPOSITORY_URI}:latest
       - echo Writing image definitions file...
       - printf '[{"name":"test-app","imageUri":"%s"}]' ${REPOSITORY_URI}:${CODEBUILD_BUILD_NUMBER} > imagedefinitions.json
       - cat imagedefinitions.json
