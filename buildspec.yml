@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    REPOSITORY_URI: "637423318618.dkr.ecr.ap-south-1.amazonaws.com/employeeform"  # Replace <ECR_REPOSITORY_URI> with your actual ECR repository URI
+    REPOSITORY_URI: "637423318618.dkr.ecr.ap-south-1.amazonaws.com/test-app"  # Replace <ECR_REPOSITORY_URI> with your actual ECR repository URI
     AWS_DEFAULT_REGION: "ap-south-1" # Add your AWS region here
 
 phases:
