@@ -13,7 +13,7 @@ phases:
       - echo "Build started on $(date)"
       - echo "Building the Docker image..."
       - docker build -t $REPOSITORY_URI:latest .
-      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+      - docker tag employeeform:latest 637423318618.dkr.ecr.ap-south-1.amazonaws.com/employeeform:latest
   post_build:
     commands:
       - echo "Build completed on $(date)"
