@@ -10,8 +10,8 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...          
-      - docker build -t employeeform .
-      - docker tag employeeform:latest 637423318618.dkr.ecr.ap-south-1.amazonaws.com/employeeform:latest      
+      - docker build -t employeeform1 .
+      - docker tag employeeform1:latest 637423318618.dkr.ecr.ap-south-1.amazonaws.com/employeeform:latest      
   post_build:
     commands:
       - echo Build completed on `date`
