@@ -4,8 +4,8 @@ phases:
     commands:
       - echo "Logging in to Amazon ECR..."
       - aws --version
-      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
-      - REPOSITORY_URI="ECR REPO URL"
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin 637423318618.dkr.ecr.ap-south-1.amazonaws.com
+      - REPOSITORY_URI="637423318618.dkr.ecr.ap-south-1.amazonaws.com/employeeform"
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG="build-$(echo $CODEBUILD_BUILD_ID)"
   build:
