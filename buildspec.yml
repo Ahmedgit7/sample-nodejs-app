@@ -12,22 +12,23 @@ phases:
       - aws --version
       - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 637423318618.dkr.ecr.ap-south-1.amazonaws.com
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID)
+      # - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID)
   build:
     commands:
       - echo Build started on $(date)
       - echo Building the Docker image...
-      - docker build -t $REPOSITORY_URI:latest .
-      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+      - docker build -t app
+      - docker tag app $REPOSITORY_URI:${CODEBUILD_BUILD_ID}
+      - docker tag app $REPOSITORY_URI:latest
   post_build:
     commands:
       - echo Build completed on $(date)
       - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 637423318618.dkr.ecr.ap-south-1.amazonaws.com
       - echo Pushing the Docker images...
       - docker push $REPOSITORY_URI:latest
-      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - docker push $REPOSITORY_URI:${CODEBUILD_BUILD_ID}
       - echo Writing image definitions file...
-      - printf '[{"name":"test-app","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name":"test-app","imageUri":"%s"}]' $REPOSITORY_URI:${CODEBUILD_BUILD_ID} > imagedefinitions.json
       - cat imagedefinitions.json
 
 artifacts:
