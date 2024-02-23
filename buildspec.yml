@@ -20,6 +20,7 @@ phases:
       - echo Building the Docker image...
       - docker build -t app .
       - docker tag app ${REPOSITORY_URI}:${CODEBUILD_BUILD_NUMBER}
+      - docker images 
       - docker tag app ${REPOSITORY_URI}:latest
   post_build:
     commands:
